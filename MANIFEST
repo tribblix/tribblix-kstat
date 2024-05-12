@@ -1,0 +1,11 @@
+CHANGES.txt
+Kstat.pm
+Kstat.xs
+MANIFEST
+META.json
+META.yml
+Makefile.PL
+README.md
+bin/perlkstat
+man/perlkstat.1
+t/Kstat.t

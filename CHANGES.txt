@@ -1,0 +1,14 @@
+All times (snaptime, crtime, the times in IO kstats) are reported in
+the underlying raw nanoseconds, rather than being converted into
+seconds.
+
+Added getKCID for JKstat compatibility.
+
+Fix typo retured.
+
+Rename Sun::Solaris::Kstat to Tribblix::Kstat so as to avoid naming
+collisions.
+
+Restore a copy of the old perl kstat utility and man page, as
+perlkstat. This is to provide an easy way to check the module itself
+is functional.
