@@ -23,7 +23,7 @@
  * Copyright (c) 1999, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2014 Racktop Systems.
  * Copyright 2019 OmniOS Community Edition (OmniOSce) Association.
- * Copyright 2020 Peter Tribble.
+ * Copyright 2024 Peter Tribble.
  */
 
 /*
@@ -1166,6 +1166,7 @@ CODE:
 		/* Save the data necessary to read the kstat info on demand */
 		hv_store(tie, "class", 5, newSVpv(kp->ks_class, 0), 0);
 		hv_store(tie, "crtime", 6, NEW_HRTIME(kp->ks_crtime), 0);
+		hv_store(tie, "ks_type", 7, newSVuv(kp->ks_type), 0);
 		kstatinfo.kstat = kp;
 		kstatsv = newSVpv((char *)&kstatinfo, sizeof (kstatinfo));
 		sv_magic((SV *)tie, kstatsv, '~', 0, 0);
@@ -1294,6 +1295,8 @@ PPCODE:
 				    newSVpv(kp->ks_class, 0), 0);
 				hv_store(tie, "crtime", 6,
 				    NEW_HRTIME(kp->ks_crtime), 0);
+				hv_store(tie, "ks_type", 7,
+				    newSVuv(kp->ks_type), 0);
 				kstatinfo.kstat = kp;
 				kstatsv = newSVpv((char *)&kstatinfo,
 				    sizeof (kstatinfo));
@@ -1413,7 +1416,7 @@ PREINIT:
 CODE:
 	self = SvRV(self);
 	k = SvPV(key, klen);
-	if (strNE(k, "class") && strNE(k, "crtime")) {
+	if (strNE(k, "class") && strNE(k, "crtime") && strNE(k, "ks_type")) {
 		read_kstats((HV *)self, FALSE);
 	}
 	value = hv_fetch((HV *)self, k, klen, FALSE);
@@ -1442,7 +1445,7 @@ PREINIT:
 CODE:
 	self = SvRV(self);
 	k = SvPV(key, klen);
-	if (strNE(k, "class") && strNE(k, "crtime")) {
+	if (strNE(k, "class") && strNE(k, "crtime") && strNE(k, "ks_type")) {
 		read_kstats((HV *)self, FALSE);
 	}
 	SvREFCNT_inc(value);
@@ -1464,7 +1467,7 @@ PREINIT:
 CODE:
 	self = SvRV(self);
 	k = SvPV(key, PL_na);
-	if (strNE(k, "class") && strNE(k, "crtime")) {
+	if (strNE(k, "class") && strNE(k, "crtime") && strNE(k, "ks_type")) {
 		read_kstats((HV *)self, FALSE);
 	}
 	RETVAL = hv_exists_ent((HV *)self, key, 0);
@@ -1548,3 +1551,4 @@ CODE:
 	kip->valid = TRUE;
 	hv_store((HV *)self, "class", 5, newSVpv(kip->kstat->ks_class, 0), 0);
 	hv_store((HV *)self, "crtime", 6, NEW_HRTIME(kip->kstat->ks_crtime), 0);
+	hv_store((HV *)self, "ks_type", 7, newSVuv(kip->kstat->ks_type), 0);

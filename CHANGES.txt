@@ -1,3 +1,5 @@
+Expose ks_type so consumers know what type of kstat they're dealing with.
+
 All times (snaptime, crtime, the times in IO kstats) are reported in
 the underlying raw nanoseconds, rather than being converted into
 seconds.
