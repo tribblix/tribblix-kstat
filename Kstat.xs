@@ -612,7 +612,7 @@ static kstat_raw_reader_t lookup_raw_kstat_fn(char *module, char *name)
 	}
 	*t = '\0';
 
-	/* look up & return the function, or teturn 0 if not found */
+	/* look up & return the function, or return 0 if not found */
 	if ((entry = hv_fetch(raw_kstat_lookup, key, strlen(key), FALSE)) == 0)
 	{
 		fnp = 0;
@@ -1131,7 +1131,7 @@ CODE:
 	sv_magic(SvRV(RETVAL), kcsv, '~', 0, 0);
 	SvREFCNT_dec(kcsv);
 
-	/* Initialise the KstatsInfo_t structure */
+	/* Initialise the KstatInfo_t structure */
 	kstatinfo.read = FALSE;
 	kstatinfo.valid = TRUE;
 	kstatinfo.strip_str = strip_str;
@@ -1179,7 +1179,7 @@ OUTPUT:
 
  #
  # Update the perl hash structure so that it is in line with the kernel kstats
- # data.  Only kstats athat have previously been accessed are read,
+ # data.  Only kstats that have previously been accessed are read,
  #
 
  # Scalar context: true/false
