@@ -167,7 +167,7 @@ if (! defined(eval { $ks->update() })) {
 }
 $test++;
 my $interval = $ks->{cpu_info}{$cpu}{$cpu_info}{snaptime} - $then;
-if ($interval >= 2.5 && $interval <= 3.5) {
+if ($interval >= 2.5e9 && $interval <= 3.5e9) {
 	print("ok $test\n");
 } else {
 	print("not ok $test\n");

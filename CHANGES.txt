@@ -1,3 +1,6 @@
+Fix tests; final test validates changes in timestamp, which are now
+nanoseconds rather than seconds.
+
 Add example/pkstatserver.pl, a Mojolicious-powered REST service that
 can be used by a JKstat client, which depends on most of the other
 changes made here.
