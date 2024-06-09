@@ -1,3 +1,7 @@
+Add example/pkstatserver.pl, a Mojolicious-powered REST service that
+can be used by a JKstat client, which depends on most of the other
+changes made here.
+
 Expose ks_type so consumers know what type of kstat they're dealing with.
 
 All times (snaptime, crtime, the times in IO kstats) are reported in
